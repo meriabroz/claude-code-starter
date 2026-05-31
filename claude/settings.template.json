@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep",
+      "Agent",
+      "WebFetch",
+      "WebSearch"
+    ],
+    "deny": [
+      "Read(*.mp4)",
+      "Read(*.mov)",
+      "Read(*.avi)",
+      "Read(*.mkv)",
+      "Read(*.mp3)",
+      "Read(*.wav)",
+      "Read(*.flac)",
+      "Read(*.aac)",
+      "Read(*.zip)",
+      "Read(*.tar.gz)",
+      "Read(*.rar)",
+      "Read(*.7z)",
+      "Read(*.dmg)",
+      "Read(*.iso)",
+      "Read(*.psd)",
+      "Read(*.ai)",
+      "Read(*.sketch)",
+      "Read(*.fig)",
+      "Read(~/.ssh/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.azure/**)",
+      "Read(~/.kube/**)",
+      "Read(~/.docker/config.json)",
+      "Read(~/.npmrc)",
+      "Read(~/.pypirc)",
+      "Read(~/.git-credentials)",
+      "Read(~/.gem/credentials)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/*.gpg)",
+      "Read(**/*.cert)",
+      "Read(**/*.crt)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "__CLAUDE_DIR__/hooks/block-destructive-commands.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "__CLAUDE_DIR__/hooks/block-writes-to-protected-paths.sh"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "__CLAUDE_DIR__/hooks/save-context-before-compact.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "__CLAUDE_DIR__/hooks/session-git-status.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "effortLevel": "high"
+}
