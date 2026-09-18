@@ -1,5 +1,11 @@
 # Claude Code Starter Kit
 
+> **Update (September 2026):** this kit's verification rules (`verification-and-testing.md`, `verify-agent-output.md`,
+> `agents.md`) make current Claude models over-check instead of ship — Anthropic's guidance for Claude Opus 5 says
+> verification instructions now "cause over-verification". The replacement is
+> **[claude-code-execution-first](https://github.com/MeriaApp/claude-code-execution-first)**: plan once, finish one thing per
+> session, a professional checklist instead of review loops. Install it alongside (or instead of) those three rules.
+
 A clean, opinionated starting configuration for [Claude Code](https://claude.com/claude-code) — the
 global rules, safety hooks, permissions, and a dedicated-workspace model that turn a fresh install
 into a careful, production-minded coding partner from the first session.
