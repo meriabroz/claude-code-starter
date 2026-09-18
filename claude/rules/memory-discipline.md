@@ -3,9 +3,10 @@
 Claude Code has persistent file-based memory at `~/.claude/projects/<scope>/memory/`. It survives
 across sessions. Use it for durable knowledge — not for a running log of what happened today.
 
-## Save aggressively during work
+## Save when you learn something durable
 
-Save to memory the moment you:
+Zero to a few saves per session is normal; zero is right when nothing durable was learned. Save the
+moment you:
 - Discover a non-obvious fact about how a system works.
 - Find the root cause of a bug or a weird behavior.
 - Make a decision based on a trade-off — save the *why*, not just the *what*.

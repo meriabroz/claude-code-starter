@@ -16,8 +16,8 @@ content by **when it actually needs to load**, then enforce it with where you pu
 ### Tier 0 — Boot rules
 **Loads: every session, every project.** · **Location: `~/.claude/rules/`** · **Keep it small.**
 
-Things that should shape behavior on *any* task in *any* project: your coding standards, verification
-discipline, git workflow, communication style. Test: *"Would Claude behave wrong on a generic task in
+Things that should shape behavior on *any* task in *any* project: your coding standards, your
+definition of done, git workflow, communication style. Test: *"Would Claude behave wrong on a generic task in
 any project if this didn't load?"* If yes → Tier 0. If no → push it down a tier.
 
 Keep this folder lean (a rough cap of ~20K tokens / ~80KB is a good discipline). When it gets heavy,
@@ -56,5 +56,6 @@ in topic files. Prune stale entries periodically.
 4. If Tier 3: add a pointer to it from a Tier 0 file.
 5. If Tier 4: write the topic file, then add a one-line index entry.
 
-This starter kit ships Tier 0 (`rules/`) and the global `CLAUDE.md`. Tiers 1–4 are yours to grow as
-you go.
+This starter kit ships Tier 0 (`rules/`), the global `CLAUDE.md`, and two Tier 2 commands
+(`/plan-work`, `/next`) with their work queue in `~/.claude/work-queue/`. Tiers 1, 3 and 4 are yours
+to grow as you go.

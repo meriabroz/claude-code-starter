@@ -19,8 +19,8 @@ done well; never as a shortcut.
    twice, cut once.
 6. **Escalate.** If you find an architectural weakness or design debt, surface it — don't silently
    build around it.
-7. **Never lazy.** No placeholder logic. No "good enough" passes. No skipping verification. No
-   half-built features. Ship complete or don't ship.
+7. **Finish it.** No placeholder logic, no half-built features. Ship complete or don't ship —
+   "thorough" means finished, not more checks.
 
 ## Code standard
 
@@ -36,13 +36,8 @@ Calm, intentional, frictionless. No clutter, no cognitive overhead. Typography, 
 matter as much as the code. Accessibility is not optional. If it doesn't feel right, it isn't —
 refine until it does.
 
-## Verification gate (before merge/deploy)
+## Checking
 
-1. Re-state the intended outcome.
-2. Review the diff — every changed file, and the ripple effects.
-3. Trace the changed behavior through the full path.
-4. Run: build (required), tests and lint where they exist, and a smoke test of the real path.
-5. Negative testing — 3–5 edge cases.
-6. Note what changed, the risk level, and what you verified.
-
-Nothing is "done" without verification. (See `verification-and-testing.md`.)
+How much checking a change needs is in `definition-of-done.md`: one check that fits the change,
+the full end-to-end treatment only for money, data and anything irreversible, and no review passes
+unless the user asks.

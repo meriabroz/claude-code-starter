@@ -1,14 +1,8 @@
 # Claude Code Starter Kit
 
-> **Update (September 2026):** this kit's verification rules (`verification-and-testing.md`, `verify-agent-output.md`,
-> `agents.md`) make current Claude models over-check instead of ship — Anthropic's guidance for Claude Opus 5 says
-> verification instructions now "cause over-verification". The replacement is
-> **[claude-code-execution-first](https://github.com/MeriaApp/claude-code-execution-first)**: plan once, finish one thing per
-> session, a professional checklist instead of review loops. Install it alongside (or instead of) those three rules.
-
 A clean, opinionated starting configuration for [Claude Code](https://claude.com/claude-code) — the
 global rules, safety hooks, permissions, and a dedicated-workspace model that turn a fresh install
-into a careful, production-minded coding partner from the first session.
+into a production-minded coding partner that finishes what it starts, from the first session.
 
 It installs into your **user-level** `~/.claude/` directory, so it applies to every project on your
 machine. Nothing here is project-specific — it's the baseline behavior layer.
@@ -24,8 +18,9 @@ machine. Nothing here is project-specific — it's the baseline behavior layer.
 | Piece | What it does |
 |---|---|
 | **`CLAUDE.md`** | Global instructions loaded every session: how to communicate, the quality bar, working principles, and pointers to the rule files. |
-| **`rules/`** | Nine focused "boot rules" that shape behavior every turn — coding standards, a verification discipline, git workflow, agent-output fact-checking, memory habits, file hygiene, and context management. |
-| **`hooks/`** | Four shell hooks that act as guardrails: block destructive commands, protect credential/system paths from writes, snapshot git state at session start, and preserve project state through context compaction. |
+| **`rules/`** | Nine focused "boot rules" that shape behavior every turn — execution-first delivery, a proportionate definition of done, the work queue, coding standards, git workflow, memory habits, file hygiene, and context management. |
+| **`commands/`** | `/plan-work` plans a big ask into a queue of items; `/next` takes one item and finishes it — built, deployed, done. |
+| **`hooks/`** | Four shell hooks: block destructive commands, protect credential/system paths from writes, show git state at session start, and restore project state after context compaction. |
 | **`settings.json`** | Permissions (a sensible allow-list), a deny-list that keeps Claude out of credentials and binary files, and the wiring that connects the hooks. |
 | **`ARCHITECTURE.md`** | The 5-tier model for *what config lives where and when it loads* — so your setup stays lean instead of ballooning into 100K tokens of boot context. |
 | **`docs/`** | The dedicated-workspace model: why every project gets its own folder + git repo, and how that keeps Claude's blast radius contained. |
@@ -75,11 +70,23 @@ It'll walk the same steps and explain what it's doing.
 ## What it changes about Claude's behavior
 
 - **Reads before editing**, keeps diffs minimal, no placeholder/TODO stubs.
-- **Verifies its work** — "it builds" isn't "it's done"; the real path gets exercised before anything is called complete, and hype words ("fully verified", "production-ready") are banned without evidence.
-- **Fact-checks sub-agents** against primary sources before acting on their findings.
+- **Finishes the job** — delivers what you asked at the scope you meant, checks it the way it could realistically break (a ceiling as much as a floor), ships it, and says plainly what it did and didn't check. No review loops or self-audit agents unless you ask.
+- **Plans once, then executes one item per session** — `/plan-work` turns a big ask into queue items with a professional checklist each; `/next` takes one and finishes it. The queue replaces handoff documents.
+- **Delegates sparingly** — subagents only for big parallel work, never to double-check itself; it checks an agent's key claims before acting on them.
 - **Commits sanely** — stages files by name (never `git add -A`), writes "why" in the message, never force-pushes to main.
 - **Stays out of dangerous territory** — `rm -rf`, `sudo`, pipe-to-shell, disk ops, and writes to credential/system paths are blocked at the hook layer.
 - **Uses persistent memory** for durable cross-session knowledge.
+
+---
+
+## Why it works this way
+
+Current Claude models check their own work without being told to. Anthropic's guidance for Claude
+Opus 5 says instructions telling it to verify "now cause over-verification" and that removing them
+costs nothing ([migration guide](https://platform.claude.com/docs/en/about-claude/models/migration-guide)).
+The rules here set a proportionate bar instead of piling on checks. The measurement behind this, a
+stand-alone version you can hand to an existing setup, and a script to measure your own sessions are
+in [claude-code-execution-first](https://github.com/MeriaApp/claude-code-execution-first).
 
 ---
 

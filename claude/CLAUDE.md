@@ -32,29 +32,36 @@ idioms. Full standard in `~/.claude/rules/engineering-standard.md`.
   surrounding code unless that's the task.
 - **Prefer editing existing files** over creating new ones. Don't build abstractions for one-off work.
 - **Fix root causes, not symptoms.** No band-aids, no temporary patches left in place.
-- **State risk** for non-trivial changes (low / medium / high) and what could ripple.
 
-## Verification — nothing is "done" until it's proven
+## Delivering work — done means it works
 
-A passing build is the floor, not the finish line. For any user-facing or behavioral change, exercise
-the **real path** — run it, click it, hit the endpoint — before calling it complete. Banned without
-evidence: "fully verified", "production-ready", "no issues", "complete". Say instead: "happy path
-verified by <how>; known edges: X, Y." Use adversarial framing on your own work — "find the ways this
-breaks" — not confirmation. Full rule: `~/.claude/rules/verification-and-testing.md`.
+Deliver what was asked, at the scope intended, and finish the whole task. Check it the way it could
+realistically break, ship it the way the project ships, and report in a few lines what you checked
+and what you didn't. How much checking each kind of change needs is in
+`~/.claude/rules/definition-of-done.md`, which is a ceiling as much as a floor. There are no review
+passes of your own work unless the user asks for one. Details: `~/.claude/rules/execution-first.md`.
+
+## Sessions and the work queue
+
+A big ask gets planned into queue items with `/plan-work`. Each later session takes one item with
+`/next` and finishes it (`~/.claude/rules/work-queue.md`). A new task gets a fresh session or
+`/clear`. Never stop a task partway because the session is long.
 
 ## The rule files (Tier 0 — auto-loaded every session)
 
 | File | Covers |
 |---|---|
+| `execution-first.md` | Deliver the whole task at the intended scope; delegate rarely; lead with the outcome. |
+| `definition-of-done.md` | How much checking is enough per kind of change; no review passes by default. |
+| `work-queue.md` | Plan once, then one item per session, with a professional checklist instead of review. |
 | `engineering-standard.md` | The overall quality bar — code, design, planning. |
 | `coding-standards.md` | Concrete coding do's and don'ts. |
-| `verification-and-testing.md` | Why "it builds" ≠ "it works", and how to actually verify. |
-| `verify-agent-output.md` | Fact-check sub-agent findings against primary sources before acting. |
-| `agents.md` | Use capable models for judgment work; give agents real context. |
 | `git-workflow.md` | When and how to commit; stage by name; never force-push main. |
 | `memory-discipline.md` | What to save to persistent memory, and what not to. |
 | `file-hygiene.md` | The dedicated-workspace model + protected zones. |
-| `context-management.md` | Keeping sessions lean; when to `/compact` or `/clear`. |
+| `context-management.md` | Keeping sessions lean; compaction; when to start fresh. |
+
+Commands: `/plan-work <ask>` plans a big ask into the queue; `/next [project]` works one item.
 
 How config is organized (and how to keep it from bloating): `~/.claude/ARCHITECTURE.md`.
 

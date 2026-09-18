@@ -20,10 +20,14 @@ Long sessions degrade: context fills, detail gets summarized, and quality drops.
 ## Preserve state across compaction
 
 If a project keeps a running scratchpad (e.g. `CONTEXT_STATE.md` at its root), the included
-`save-context-before-compact.sh` hook injects it back into context when compaction happens — so
-project state survives. Keep that file updated with what changed and what's next on longer efforts.
+`restore-context-after-compact.sh` hook (SessionStart, matcher `compact`) re-injects its last lines
+after compaction, so the next turn picks up where the work was. Keep that file updated with what
+changed and what's next on longer efforts.
 
 ## Signals to start fresh
+
+- A new, unrelated task (use `/clear` or a new session). Don't stop a task partway because the
+  session is long.
 
 - Context is past ~70% full.
 - You've hit the same failing approach 2+ times (a fix loop) — step back, re-read, change tack.

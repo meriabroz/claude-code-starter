@@ -68,17 +68,6 @@
         ]
       }
     ],
-    "PreCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "__CLAUDE_DIR__/hooks/save-context-before-compact.sh"
-          }
-        ]
-      }
-    ],
     "SessionStart": [
       {
         "matcher": "",
@@ -88,8 +77,16 @@
             "command": "__CLAUDE_DIR__/hooks/session-git-status.sh"
           }
         ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "__CLAUDE_DIR__/hooks/restore-context-after-compact.sh"
+          }
+        ]
       }
     ]
-  },
-  "effortLevel": "high"
+  }
 }

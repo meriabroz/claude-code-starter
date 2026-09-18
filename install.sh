@@ -56,6 +56,15 @@ for f in "$SRC"/rules/*.md; do
 done
 ok "installed rules/ ($(ls -1 "$SRC"/rules/*.md | wc -l | tr -d ' ') files)"
 
+# --- commands/ + work queue ---------------------------------------------------
+mkdir -p "$CLAUDE_DIR/commands" "$CLAUDE_DIR/work-queue"
+for f in "$SRC"/commands/*.md; do
+  name="$(basename "$f")"
+  backup_if_exists "$CLAUDE_DIR/commands/$name"
+  cp "$f" "$CLAUDE_DIR/commands/$name"
+done
+ok "installed commands/ (/plan-work, /next) and the work-queue folder"
+
 # --- hooks/ ------------------------------------------------------------------
 mkdir -p "$CLAUDE_DIR/hooks"
 for f in "$SRC"/hooks/*.sh; do
@@ -97,4 +106,4 @@ if [ -d "$BACKUP_DIR" ]; then
 else
   ok "Done. (Nothing existing was overwritten — clean install.)"
 fi
-say "Start a new Claude Code session to load the config."
+say "Start a new Claude Code session to load the config. Then try /plan-work <a big ask>, or /next."
